@@ -8,6 +8,7 @@ export function schemasChanged(): boolean {
   const branch = exec(['git', 'rev-parse', '--abbrev-ref', 'HEAD']);
   exec(['git', 'fetch', 'origin', '--prune']);
   const changes = exec(['git', 'diff', '--name-only', branch, 'remotes/origin/main']).split('\n');
+  console.log(`changes: ${changes}`);
   return changes.filter((change) => getGeneratedSchemaPaths().includes(change)).length > 0;
 }
 
